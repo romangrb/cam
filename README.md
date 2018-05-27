@@ -1,27 +1,44 @@
-# N5CompleteGuide
+solution
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+authors.component.ts
 
-## Development server
+import { AuthorsService } from './../authors.service';
+import { Component, OnInit } from '@angular/core';
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+@Component({
+  selector: 'authors',
+    template: `
+      <h2>Angular</h2>
+      <ul>
+        <li *ngFor="let author of authors">
+        {‌{ author }}
+        </li>
+      </ul>
+    `
+})
+export class AuthorsComponent implements OnInit {
+    authors;
+  constructor(private authorsService: AuthorsService) { 
+    this.authors = authorsService.getAuthors();
+  }
+  
+  ngOnInit() {
+  }
 
-## Code scaffolding
+}
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+authors.service.ts
+  
+import { Injectable } from '@angular/core';
+  
+@Injectable()
+export class AuthorsService {
+  
+  constructor() { }
+  
+  getAuthors() {
+    return ["author1", "author2", "author3"];
+  }
 
-## Build
+}
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
